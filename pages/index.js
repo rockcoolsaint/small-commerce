@@ -4,17 +4,13 @@ import { useEffect, useState } from 'react'
 import Product from '@/components/Product'
 import { findAllProducts } from './api/products'
 import { initMongoose } from '@/lib/mongoose'
+import Footer from '@/components/Footer'
+import Layout from '@/components/Layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({products}) {
-  // const [productsInfo, setProductsInfo] = useState([]);
   const [phrase, setPhrase] = useState('');
-  // useEffect(() => {
-  //   fetch('/api/products')
-  //   .then(response => response.json())
-  //   .then(json =>setProductsInfo(json));
-  // }, []);
 
   const categoriesNames = [...new Set(products.map(p => p.category))]
 
@@ -23,7 +19,7 @@ export default function Home({products}) {
   }
 
   return (
-    <div className='p-5'>
+    <Layout>
       <input value={phrase} onChange={e => setPhrase(e.target.value)} type="text" placeholder="Search for products..." className="bg-gray-200 w-full py-2 px-4 rounded-xl"/>
       <div>
         {categoriesNames.map(categoryName => (
@@ -43,7 +39,7 @@ export default function Home({products}) {
           </div>
         ))}
       </div>
-    </div>
+    </Layout>
   )
 }
 
